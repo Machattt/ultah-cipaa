@@ -1,9 +1,7 @@
-// State Management
 let currentPage = 0;
 const totalPages = 5;
 let musicPlaying = false;
 
-// DOM Elements
 const surpriseContainer = document.getElementById('surprise-container');
 const flipbookContainer = document.getElementById('flipbook-container');
 const giftIcon = document.getElementById('gift-icon');
@@ -16,37 +14,20 @@ const hugBtn = document.getElementById('hug-btn');
 const hugAnimation = document.getElementById('hug-animation');
 const birthdayMusic = document.getElementById('birthday-music');
 
-// Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    // Setup event listeners
     setupEventListeners();
-    
-    // Initialize page display
     updatePageDisplay();
-    
-    // Start background music after user interaction
     setupMusicAutoplay();
 });
 
-// Setup all event listeners
 function setupEventListeners() {
-    // Gift icon click - main surprise trigger
     giftIcon.addEventListener('click', openSurprise);
-    
-    // Navigation buttons
     prevBtn.addEventListener('click', goToPreviousPage);
     nextBtn.addEventListener('click', goToNextPage);
-    
-    // Virtual hug button
     hugBtn.addEventListener('click', showVirtualHug);
-    
-    // Keyboard navigation
     document.addEventListener('keydown', handleKeyboardNavigation);
-    
-    // Click outside hug animation to close
     hugAnimation.addEventListener('click', hideVirtualHug);
     
-    // Prevent propagation on hug content
     const hugContent = hugAnimation.querySelector('.hug-content');
     if (hugContent) {
         hugContent.addEventListener('click', function(e) {
@@ -55,7 +36,6 @@ function setupEventListeners() {
     }
 }
 
-// Setup music autoplay with user interaction
 function setupMusicAutoplay() {
     const startMusic = () => {
         if (!musicPlaying) {
@@ -66,27 +46,19 @@ function setupMusicAutoplay() {
         }
     };
     
-    // Try to play music on first user interaction
     document.addEventListener('click', startMusic, { once: true });
     document.addEventListener('keydown', startMusic, { once: true });
 }
 
-// Open the surprise flipbook with animation
 function openSurprise() {
-    // Add clicking animation to gift
     giftIcon.style.transform = 'scale(0.9) rotate(-5deg)';
     
     setTimeout(() => {
         giftIcon.style.transform = 'scale(1.1) rotate(5deg)';
         
         setTimeout(() => {
-            // Hide surprise container
             surpriseContainer.classList.add('hidden');
-            
-            // Show flipbook with animation
             flipbookContainer.classList.remove('hidden');
-            
-            // Start music if not already playing
             if (!musicPlaying) {
                 birthdayMusic.play().catch(error => {
                     console.log('Music play failed:', error);
@@ -102,7 +74,6 @@ function openSurprise() {
     }, 150);
 }
 
-// Navigate to previous page
 function goToPreviousPage() {
     if (currentPage > 0) {
         console.log('Going to previous page from', currentPage, 'to', currentPage - 1);
@@ -111,7 +82,6 @@ function goToPreviousPage() {
     }
 }
 
-// Navigate to next page
 function goToNextPage() {
     if (currentPage < totalPages - 1) {
         console.log('Going to next page from', currentPage, 'to', currentPage + 1);
@@ -120,16 +90,13 @@ function goToNextPage() {
     }
 }
 
-// Animate page flip effect
 function animatePageFlip(direction) {
     const pages = document.querySelectorAll('.page');
     const currentPageElement = pages[currentPage];
     
     if (currentPageElement) {
-        // Add flipping animation class
         currentPageElement.classList.add('flipping');
         
-        // Remove animation class after animation completes
         setTimeout(() => {
             currentPageElement.classList.remove('flipping');
             if (direction === 'next') {
@@ -141,11 +108,9 @@ function animatePageFlip(direction) {
     }
 }
 
-// Update page display and navigation
 function updatePageDisplay() {
     const pages = document.querySelectorAll('.page');
     
-    // Reset all pages
     pages.forEach((page, index) => {
         page.style.display = 'none';
         page.style.zIndex = 1;
@@ -153,27 +118,22 @@ function updatePageDisplay() {
         page.classList.remove('flipping', 'flipped');
     });
     
-    // Show current page
     if (pages[currentPage]) {
         pages[currentPage].style.display = 'block';
         pages[currentPage].style.zIndex = 10;
     }
     
-    // Update navigation buttons
     prevBtn.disabled = currentPage === 0;
     nextBtn.disabled = currentPage === totalPages - 1;
     
-    // Update page counter
     pageCounter.textContent = `${currentPage + 1} / ${totalPages}`;
     
-    // Show virtual hug button on last page
     if (currentPage === totalPages - 1) {
         virtualHug.classList.remove('hidden');
     } else {
         virtualHug.classList.add('hidden');
     }
     
-    // Add entrance animation for new page
     if (pages[currentPage]) {
         pages[currentPage].style.animation = 'fadeIn 0.6s ease-out';
     }
@@ -181,7 +141,6 @@ function updatePageDisplay() {
     console.log('Current page:', currentPage, 'Total pages:', totalPages);
 }
 
-// Handle keyboard navigation
 function handleKeyboardNavigation(event) {
     if (flipbookContainer.classList.contains('hidden')) return;
     
@@ -219,7 +178,6 @@ function handleKeyboardNavigation(event) {
     }
 }
 
-// Go to specific page
 function goToPage(pageNumber) {
     if (pageNumber >= 0 && pageNumber < totalPages && pageNumber !== currentPage) {
         const direction = pageNumber > currentPage ? 'next' : 'prev';
@@ -229,26 +187,21 @@ function goToPage(pageNumber) {
     }
 }
 
-// Show virtual hug animation
 function showVirtualHug() {
     hugAnimation.classList.remove('hidden');
     
-    // Add entrance animation
     const hugContent = hugAnimation.querySelector('.hug-content');
     if (hugContent) {
         hugContent.style.animation = 'hugFadeIn 0.5s ease-out';
     }
     
-    // Play hug sound effect
     playHugEffect();
     
-    // Trigger bear animation
     const bearAnimation = hugAnimation.querySelector('.bear-animation');
     if (bearAnimation) {
         bearAnimation.style.animation = 'hugBear 2s ease-in-out infinite';
     }
     
-    // Auto-hide after 5 seconds
     setTimeout(() => {
         if (!hugAnimation.classList.contains('hidden')) {
             hideVirtualHug();
@@ -256,14 +209,11 @@ function showVirtualHug() {
     }, 5000);
 }
 
-// Hide virtual hug animation
 function hideVirtualHug() {
     hugAnimation.classList.add('hidden');
 }
 
-// Play hug sound effect
 function playHugEffect() {
-    // Create a simple beep sound using Web Audio API
     try {
         const audioContext = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioContext.createOscillator();
@@ -285,12 +235,10 @@ function playHugEffect() {
     }
 }
 
-// Add smooth page transition effects
 function addPageTransitionEffects() {
     const pages = document.querySelectorAll('.page');
     
     pages.forEach((page, index) => {
-        // Add hover effects for interactive elements
         const photos = page.querySelectorAll('.photo-placeholder');
         photos.forEach(photo => {
             photo.addEventListener('mouseenter', () => {
@@ -303,7 +251,6 @@ function addPageTransitionEffects() {
             });
         });
         
-        // Add click effect to photos
         photos.forEach(photo => {
             photo.addEventListener('click', () => {
                 photo.style.animation = 'pulse 0.6s ease-in-out';
@@ -315,7 +262,6 @@ function addPageTransitionEffects() {
     });
 }
 
-// Enhanced gift box animation
 function enhanceGiftAnimation() {
     const giftBox = document.querySelector('.gift-box');
     const ribbonV = document.querySelector('.gift-ribbon-v');
@@ -336,11 +282,9 @@ function enhanceGiftAnimation() {
     }
 }
 
-// Add dynamic heart animations
 function addDynamicHearts() {
     const heartsContainer = document.querySelector('.hearts-container');
     
-    // Create additional hearts on page interactions
     function createFloatingHeart(x, y) {
         const heart = document.createElement('div');
         heart.innerHTML = '💖';
@@ -355,7 +299,6 @@ function addDynamicHearts() {
             animation: floatUp 2s ease-out forwards;
         `;
         
-        // Add CSS animation for floating up
         if (!document.querySelector('#floating-heart-style')) {
             const style = document.createElement('style');
             style.id = 'floating-heart-style';
@@ -383,7 +326,6 @@ function addDynamicHearts() {
         }, 2000);
     }
     
-    // Add hearts on navigation clicks
     nextBtn.addEventListener('click', (e) => {
         const rect = nextBtn.getBoundingClientRect();
         createFloatingHeart(rect.left + rect.width / 2, rect.top);
@@ -395,7 +337,6 @@ function addDynamicHearts() {
     });
 }
 
-// Music control functions
 function toggleMusic() {
     if (birthdayMusic.paused) {
         birthdayMusic.play().catch(error => {
@@ -408,7 +349,6 @@ function toggleMusic() {
     }
 }
 
-// Add music control button (optional)
 function addMusicControl() {
     const musicBtn = document.createElement('button');
     musicBtn.innerHTML = '🎵';
@@ -442,7 +382,6 @@ function addMusicControl() {
     document.body.appendChild(musicBtn);
 }
 
-// Initialize all enhancements
 function initializeEnhancements() {
     addPageTransitionEffects();
     enhanceGiftAnimation();
@@ -450,7 +389,6 @@ function initializeEnhancements() {
     addMusicControl();
 }
 
-// Auto-advance demo (optional - can be enabled for presentation)
 function startAutoAdvance(interval = 3000) {
     let autoAdvanceInterval;
     
@@ -462,7 +400,6 @@ function startAutoAdvance(interval = 3000) {
         }
     }
     
-    // Start auto-advance after first manual interaction
     let hasInteracted = false;
     
     const checkInteraction = () => {
@@ -479,9 +416,7 @@ function startAutoAdvance(interval = 3000) {
     document.addEventListener('keydown', checkInteraction);
 }
 
-// Performance optimization
 function optimizePerformance() {
-    // Lazy load animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -495,13 +430,11 @@ function optimizePerformance() {
         });
     }, observerOptions);
     
-    // Observe all pages
     document.querySelectorAll('.page').forEach(page => {
         observer.observe(page);
     });
 }
 
-// Error handling and fallbacks
 function setupErrorHandling() {
     window.addEventListener('error', (e) => {
         console.warn('Error caught:', e.error);
@@ -515,24 +448,19 @@ function setupErrorHandling() {
         }
     });
     
-    // Handle audio errors gracefully
     birthdayMusic.addEventListener('error', () => {
         console.log('Audio failed to load, continuing without music');
         musicPlaying = false;
     });
 }
 
-// Initialize everything when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
     setupErrorHandling();
     initializeEnhancements();
     optimizePerformance();
     
-    // Optional: Uncomment to enable auto-advance demo
-    // startAutoAdvance(4000);
 });
 
-// Export functions for external use (if needed)
 window.FlipbookControls = {
     goToPage,
     goToNextPage,
