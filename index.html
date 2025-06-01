@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Cipaa ❤️</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="hearts-container">
+        <div class="heart heart1">❤️</div>
+        <div class="heart heart2">💖</div>
+        <div class="heart heart3">💕</div>
+        <div class="heart heart4">❤️</div>
+        <div class="heart heart5">💖</div>
+    </div>
+
+    <div id="surprise-container" class="surprise-container">
+        <div class="surprise-box">
+            <h1 class="surprise-title">🎁 Surprise untuk Cipaa! 🎁</h1>
+            <div class="gift-icon" id="gift-icon">
+                <div class="gift-box">
+                    <div class="gift-top"></div>
+                    <div class="gift-ribbon-v"></div>
+                    <div class="gift-ribbon-h"></div>
+                </div>
+            </div>
+            <p class="surprise-text">Klik kotak hadiah untuk membuka kejutan spesial! 💝</p>
+        </div>
+    </div>
+
+    <audio id="birthday-music" loop>
+        <source src="./music/photograph (piano instrumental)-yt.savetube.me.mp3" type="audio/mpeg">
+    </audio>
+
+    <div id="flipbook-container" class="flipbook-container hidden">
+        <div class="flipbook" id="flipbook">
+            <div class="page cover-page" data-page="0">
+                <div class="page-content">
+                    <h1 class="cover-title">Happy Birthday</h1>
+                    <h2 class="cover-name">Cipaa Cantik</h2>
+                    <div class="cover-decoration">
+                        <span class="star">⭐</span>
+                        <span class="flower">🌸</span>
+                        <span class="star">⭐</span>
+                    </div>
+                    <p class="cover-date">31 Mei 2009</p>
+                </div>
+            </div>
+
+            <div class="page content-page" data-page="1">
+                <div class="page-content">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">
+                           <img src="./img/cipa 10.jpg" alt="Foto Cipa" class="photo-image">
+                        </div>
+                    </div>
+                    <div class="message">
+                        <h3>Selamat Ulang Tahun! 🎂</h3>
+                        <p>Cipaa yang cantik, di hari spesial ini aku ingin mengucapkan selamat ulang tahun! Semoga hari-harimu selalu dipenuhi kebahagiaan dan senyuman yang indah seperti dirimu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page content-page" data-page="2">
+                <div class="page-content">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">
+                           <img src="./img/cipa with me.jpg" alt="Foto Kenangan" class="photo-image">
+                        </div>
+                    </div>
+                    <div class="message">
+                        <h3>Kenangan Indah 💕</h3>
+                        <p>Setiap momen bersamamu adalah kenangan yang berharga. Terima kasih sudah menjadi bagian dari hidupku dan membuat hari-hari menjadi lebih berarti.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page content-page" data-page="3">
+                <div class="page-content">
+                    <div class="photo-frame">
+                        <div class="photo-placeholder">
+                           <img src="./img/cipa 6.jpg" alt="foto bahagia" class="photo-image"> 
+                        </div>
+                    </div>
+                    <div class="message">
+                        <h3>Doa Terbaik 🙏</h3>
+                        <p>Semoga umur yang bertambah ini membawa berkah, kesehatan, dan kebahagiaan yang berlimpah. Semoga semua impianmu tercapai dan selalu dilindungi Yang Maha Kuasa.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page final-page" data-page="4">
+                <div class="page-content">
+                    <h2>Surat Untuk Cipaa 💖</h2>
+                    <div class="full-message">
+                        <p>Cipaa yang cantik dan baik hati,</p>
+                        <p>Hari ini adalah hari yang spesial karena hari dimana seseorang yang luar biasa seperti dirimu lahir ke dunia. Kehadiranmu membawa kebahagiaan bagi orang-orang di sekitarmu, termasuk aku.</p>
+                        <p>Semoga di tahun yang baru ini, kamu selalu dikelilingi oleh orang-orang yang menyayangimu, mendapatkan kesempatan untuk meraih semua mimpi-mimpimu, dan selalu sehat serta bahagia.</p>
+                        <p>Terima kasih sudah menjadi sosok yang menginspirasi dan membuat dunia menjadi tempat yang lebih indah.</p>
+                        <p class="signature">Dengan cinta dan doa terbaik,<br> Dari Teman mu Vee ❤️</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button id="prev-btn" class="nav-btn">← Sebelumnya</button>
+            <span id="page-counter" class="page-counter">1 / 5</span>
+            <button id="next-btn" class="nav-btn">Selanjutnya →</button>
+        </div>
+
+        <div id="virtual-hug" class="virtual-hug hidden">
+            <button id="hug-btn" class="hug-btn">
+                🐻 Peluk Virtual untuk Cipaa! 🤗
+            </button>
+        </div>
+    </div>
+
+    <div id="hug-animation" class="hug-animation hidden">
+        <div class="hug-content">
+            <h2>🤗 Peluk Virtual Buat kamu! 🤗</h2>
+            <div class="hug-bear">
+                <div class="hug-animation-container">
+                    <div class="hug-figure hug-figure-1">
+                        <div class="hug-arms"></div>
+                    </div>
+                    <div class="hug-figure hug-figure-2">
+                        <div class="hug-arms"></div>
+                    </div>
+                </div>
+                <div class="hug-text">*memeluk Cipaa dengan hangat*</div>
+            </div>
+            <div class="hug-hearts">
+                <span class="hug-heart">❤️</span>
+                <span class="hug-heart">💖</span>
+                <span class="hug-heart">💕</span>
+                <span class="hug-heart">❤️</span>
+                <span class="hug-heart">💖</span>
+            </div>
+            <p>Pelukan Virtual untukmu Cipaa! 💕</p>
+            <p class="hug-close-hint">Klik di mana saja untuk menutup</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
